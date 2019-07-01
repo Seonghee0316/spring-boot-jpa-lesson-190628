@@ -4,23 +4,24 @@
     <form>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" v-model="email">
+        <input type="text" class="form-control" id="email" placeholder="Enter email" v-model="email" />
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" v-model="pass">
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" v-model="pwd" />
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox"> Remember me
+          <input type="checkbox" /> Remember me
         </label>
       </div>
-      <button  class="btn btn-default" @click="get">조 회</button>
-      <button  class="btn btn-default" @click="post">입 력</button>
-      <button  class="btn btn-default" @click="put">수 정</button>
-      <button  class="btn btn-default" @click="del">삭 제</button>
-      <button  class="btn btn-default" @click="getInfo">값 가져오기</button>
-      <button  class="btn btn-default" @click="summit">회원가입</button>
+      <button class="btn btn-default" @click="login">login</button>
+      <button class="btn btn-default" @click="count">count</button>
+      <button class="btn btn-default" @click="deleteById">deleteById</button>
+      <button class="btn btn-default" @click="existsById">existsById</button>
+      <button class="btn btn-default" @click="findAll">findAll</button>
+      <button class="btn btn-default" @click="findById">findById</button>
+      <button class="btn btn-default" @click="save">save</button>
       <!-- <button  @submit="info" type="submit" class="btn btn-default">Submit</button> -->
     </form>
     <Footer></Footer>
@@ -30,7 +31,7 @@
 <script>
 import Nav from "@/components/common/Nav.vue";
 import Footer from "@/components/common/Footer.vue";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   components: {
@@ -39,74 +40,105 @@ export default {
   },
 
   data() {
-    return{
-      context: 'http://localhost:9000',
-      id : '',
-     password : ''
-    }
+    return {
+      context: "http://localhost:9000/customers",
+      customerId: 'zzz',
+      customerName: '김키위' ,
+      password: '1234',
+      ssn: '9999',
+      phone: '0220202',
+      city: '000',
+      address: '서울시 종로구',
+      postalcode: '1234',
+      photo: 'dddd'
+    };
   },
 
+  //하나로 연결해야함.
   methods: {
-    get() {
-      axios.get(`${this.context}/customers/count`)
-      .then(res=>{
-        alert(`SUCCESS : ${res.data}`)
-      })
-      .catch(e=>{
-        alert('ERROR')
-      })
+    count() {
+      axios
+        .get(`${this.context}/count`)
+        .then(res => {
+          alert(`count() SUCCESS : ${res.data}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     },
-    post(){
-      axios.post('/customers')
-      .then(d=>{
-        alert(`POST 연동성공: ${res.data.result}`)
-      })
+    deleteById() {
+      axios.delete(`${this.context}/1`)
+        .then(res => {
+          alert(`SUCCESS2  : ${res.data}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     },
-
-    put(){
-      axios.put('/customers/id')
-      .then(d=>{
-        alert(`PUT 연동성공: ${res.data.result}`)
-      })
+    existsById() {
+      axios
+        .get(`${this.context}/exists/1`)
+        .then(res => {
+          alert(`existsById() SUCCESS : ${res.data}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     },
-    
-    del(){
-      axios.delete('/customers/id')
-      .then(d=>{
-        alert(`DELETE 연동성공: ${res.data.result}`)
-      })
+    findAll() {
+      axios
+        .get(`${this.context}`)
+        .then(res => {
+          alert(`findAll() : ${res.data[0].customerName}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     },
-
-    getInfo(){
-      var data = {
-       id : 'haha',
-       pass : '1234'
-     }
-     axios.get(`${this.context}/customers/${id}`)
-      .then(res=>{
-        alert(`SUCCESS : ${res.data}`)
-      })
-      .catch(e=>{
-        alert('ERROR')
-      })     
+    findById() {
+      axios
+        .get(`${this.context}/1`)
+        .then(res => {
+          alert(`findById() SUCCESS : ${res.data.customerName}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     },
-    
-    summit() {
+    save() {
+      let data = {
+        id: 40,
+        customerId: this.customerId,
+        customerName: this.customerName,
+        password: this.password,
+        ssn: this.ssn,
+        phone: this.phone,
+        city: this.city,
+        address: this.address,
+        postalcode: this.postalcode,
+        photo: this.photo
+      }
 
-     var data = {
-       id : this.id,
-       pass : this.password
-     }
+      let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT fefege..'
+      }
 
-     axios.post(this.localhost + 'customers/join', data).then(e => {
-       alert('SUCCESS' + e.data);
-     }).catch(e => {
-       alert('ERROR');
-     })
-   }
-
+      axios.post(`${this.context}`, 
+                JSON.stringify(data),
+                {headers: headers})
+        .then(res => {
+          alert(`SUCCESS2 : ${res.data}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        })
+    },
+    login() {
+      alert('ddd');
+    }
   }
-};
+}
 
 // submit누르면 alert뜸 @submit id = '' , pw = ''
 </script>

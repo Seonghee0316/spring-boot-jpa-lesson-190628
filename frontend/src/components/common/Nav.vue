@@ -11,6 +11,7 @@
       <li><router-link to="/joinForm">회원가입</router-link></li>
       <li><router-link to="/loginForm">로그인</router-link></li>
       <li><router-link to="/memberList">회원 목록</router-link></li>
+      <li><router-link to="/testForm">연습</router-link></li>
     </ul>
   </div>
 </nav>
