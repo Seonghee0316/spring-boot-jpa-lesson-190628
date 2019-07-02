@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long>{
 //10개 메소드 있음.
-	public CustomerDTO login(Customer entity);
+	// public CustomerDTO login(Customer entity);
+	public Customer findByCustomerIdAndPassword(String customerId, String password);
 }
 

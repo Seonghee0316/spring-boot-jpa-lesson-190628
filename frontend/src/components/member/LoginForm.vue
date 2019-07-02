@@ -3,12 +3,24 @@
     <Nav></Nav>
     <form>
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="text" class="form-control" id="email" placeholder="Enter email" v-model="email" />
+        <label for="id">ID:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          placeholder="Enter email"
+          v-model="customerId"
+        />
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" v-model="pwd" />
+        <input
+          type="password"
+          class="form-control"
+          id="pwd"
+          placeholder="Enter password"
+          v-model="password"
+        />
       </div>
       <div class="checkbox">
         <label>
@@ -22,6 +34,8 @@
       <button class="btn btn-default" @click="findAll">findAll</button>
       <button class="btn btn-default" @click="findById">findById</button>
       <button class="btn btn-default" @click="save">save</button>
+      <button class="btn btn-default" @click="login">login</button>
+
       <!-- <button  @submit="info" type="submit" class="btn btn-default">Submit</button> -->
     </form>
     <Footer></Footer>
@@ -42,15 +56,15 @@ export default {
   data() {
     return {
       context: "http://localhost:9000/customers",
-      customerId: 'zzz',
-      customerName: '김키위' ,
-      password: '1234',
-      ssn: '9999',
-      phone: '0220202',
-      city: '000',
-      address: '서울시 종로구',
-      postalcode: '1234',
-      photo: 'dddd'
+      customerId: "abc",
+      customerName: "김키위",
+      password: "1234",
+      ssn: "9999",
+      phone: "0220202",
+      city: "000",
+      address: "서울시 종로구",
+      postalcode: "1234",
+      photo: "dddd"
     };
   },
 
@@ -67,7 +81,8 @@ export default {
         });
     },
     deleteById() {
-      axios.delete(`${this.context}/1`)
+      axios
+        .delete(`${this.context}/1`)
         .then(res => {
           alert(`SUCCESS2  : ${res.data}`);
         })
@@ -117,28 +132,46 @@ export default {
         address: this.address,
         postalcode: this.postalcode,
         photo: this.photo
-      }
+      };
 
       let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'JWT fefege..'
-      }
+        "Content-Type": "application/json",
+        Authorization: "JWT fefege.."
+      };
 
-      axios.post(`${this.context}`, 
-                JSON.stringify(data),
-                {headers: headers})
+      axios
+        .post(`${this.context}`, JSON.stringify(data), { headers: headers })
         .then(res => {
           alert(`SUCCESS2 : ${res.data}`);
         })
         .catch(e => {
           alert("ERROR");
-        })
+        });
     },
     login() {
-      alert('ddd');
+      let data = {
+        customerId: this.customerId,
+        password: this.password
+      };
+
+      let headers = {
+        "Content-Type": "application/json",
+         'Authorization' : 'JWT fefege..'
+      };
+
+      axios
+        .post(`${this.context}/login`, JSON.stringify(data), {
+          headers: headers
+        })
+        .then(res => {
+          alert(`login SUCCESS : ${res.data.customerId}`);
+        })
+        .catch(e => {
+          alert("ERROR");
+        });
     }
   }
-}
+};
 
 // submit누르면 alert뜸 @submit id = '' , pw = ''
 </script>

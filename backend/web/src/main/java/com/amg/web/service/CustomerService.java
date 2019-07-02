@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
     @Autowired CustomerRepository customerRepository;
-    public Long count() {
+    public long count() {
         return customerRepository.count();
     }
     public void delete(Customer entity) {
@@ -55,7 +55,9 @@ public class CustomerService {
         return customerRepository.saveAll(entities);
     }
 
-    public CustomerDTO login (Customer entity){
-        return customerRepository.login(entity);
+    public Customer login (String id, String pw){
+        return customerRepository.findByCustomerIdAndPassword(id, pw);
     }
+
+    
 }

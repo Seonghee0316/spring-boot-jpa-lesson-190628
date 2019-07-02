@@ -7,9 +7,12 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.amg.web.common.lambda.IFunction;
+import com.amg.web.common.lambda.ISupplier;
 import com.amg.web.common.util.Printer;
 import com.amg.web.domain.CustomerDTO;
 import com.amg.web.entities.Customer;
+import com.amg.web.repositories.CustomerRepository;
 import com.amg.web.service.CustomerService;
 
 import org.modelmapper.ModelMapper;
@@ -45,6 +48,8 @@ public class CustomerController {
     Printer p;
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    CustomerRepository repo;
 
     @Bean
     public ModelMapper modelmapper(){
@@ -145,7 +150,7 @@ public class CustomerController {
      * { return customerService.saveAll(null); }
      */
 
-     @GetMapping("/login/{id}/{pwd}")
+/*      @GetMapping("/login/{id}/{pwd}")
      public HashMap<String,String> login(@RequestBody CustomerDTO dto){
         // Customer entity = customerService
         //                     .login(Long.parseLong(id))
@@ -165,5 +170,22 @@ public class CustomerController {
             map.put("result", "Fail");
         }
         return map;
+     } */
+
+     @PostMapping("/login")
+     public CustomerDTO login(@RequestBody CustomerDTO dto){
+         //String id = dto.getCustomerId(); <-- 이건 상태를 주는 것임.
+        System.out.println("로그인 집합");
+        System.out.println("ID: " + dto.getCustomerId());
+        System.out.println("PW: " + dto.getPassword());
+
+        //재활용 하지 않겠다.
+         ISupplier fx = (()-> {
+            // Customer c = modelMapper.map(dto, Customer.class);
+                 return repo.findByCustomerIdAndPassword(dto.getCustomerId(), 
+                 dto.getPassword());
+
+         });
+         return (CustomerDTO)fx.get();
      }
 }
