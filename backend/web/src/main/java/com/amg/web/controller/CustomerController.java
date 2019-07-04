@@ -180,12 +180,15 @@ public class CustomerController {
         System.out.println("PW: " + dto.getPassword());
 
         //재활용 하지 않겠다.
-         ISupplier fx = (()-> {
+        ISupplier fx = (()-> {
             // Customer c = modelMapper.map(dto, Customer.class);
                  return repo.findByCustomerIdAndPassword(dto.getCustomerId(), 
                  dto.getPassword());
 
          });
-         return (CustomerDTO)fx.get();
+        //  CustomerDTO c = modelMapper.map(dto, CustomerDTO.class);
+        //  return c;
+         return dto;
+        //  return (CustomerDTO)fx.get();
      }
 }
