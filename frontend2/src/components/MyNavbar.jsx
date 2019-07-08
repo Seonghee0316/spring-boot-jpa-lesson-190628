@@ -1,30 +1,73 @@
 import React from 'react'
+import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-bootstrap'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import Login from '../containers/customer/Login.jsx'
+import Join from '../containers/customer/Join.jsx'
+import Mypage from '../containers/customer/Mypage.jsx'
+import Home from '../containers/common/Home.jsx'
+import Hello from '../containers/customer/Hello.jsx'
+import LightSwitch from '../containers/common/LightSwitch.jsx'
+import Timer from '../containers/common/Timer.jsx'
+import TodoApp from '../containers/common/TodoApp.jsx'
+import Clock from '../containers/common/Clock.jsx'
 
-
-const Navbar = () => {
+const MyNavbar = () => {
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-success">Search</Button>
-                </Form>
-            </Navbar.Collapse>
-        </Navbar>
+        <Router>
+            <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="#home">BITCAMP</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="#">
+                        <Link to="home"> Home</Link>
+                            
+                            </Nav.Link>
+                        <Nav.Link href="TodoApp">스케줄러</Nav.Link>
+                        <NavDropdown title="기본문법" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="join">
+                            <Nav.Link href="Hello">Hello</Nav.Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="join">
+                            <Nav.Link href="Clock">시계</Nav.Link>
+                            </NavDropdown.Item>
+
+                            <NavDropdown.Item href="login">
+                            <Nav.Link href="LightSwitch">LightSwitch</Nav.Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="mypage">
+                            <Nav.Link href="Timer">Timer</Nav.Link>
+                                </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="remove">
+                            회원탈퇴
+                            </NavDropdown.Item>
+
+                        </NavDropdown>
+                       
+
+                       
+
+                    </Nav>
+                    <Form inline>
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                        <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Navbar.Collapse>
+            </Navbar>
+            <Route path="/login" exact component={Login} />
+            <Route path="/join" exact component={Join} />
+            <Route path="/mypage" exact component={Mypage} />
+            <Route path="/home" exact component={Home} />
+            <Route path="/hello" exact component={Hello}/>
+            <Route path="/lightSwitch" exact component={LightSwitch}/>
+            <Route path="/timer" exact component={Timer}/>
+            <Route path="/todoApp" exact component={TodoApp}/>
+            <Route path="/clock" exact component={Clock}/>
+            {/* <Route path="/"exact component={App}/> */}
+
+        </Router>
     )
 }
 
-export default Navbar
+export default MyNavbar
