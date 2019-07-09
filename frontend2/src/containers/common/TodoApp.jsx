@@ -7,8 +7,8 @@ class TodoApp extends Component {
         this.state = {items:[], text: ''};
         // handleChange이벤트를 bind 붙여라?
         // 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        /* this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this); */
     }
 
     render(){
@@ -33,13 +33,13 @@ class TodoApp extends Component {
         );
     }
 
-    handleChange(e){
+    handleChange=(e)=>{
         this.setState({text: e.target.value});
     }
 
     //form태그로 인해 submin되는 걸 막고 값이 없을시에 막아라. 
     //handler의 코드의 끝은 ? this.set임
-    handleSubmit(e) {
+    handleSubmit=(e)=> {
         e.preventDefault();
         if(!this.state.text.length){
             return;
