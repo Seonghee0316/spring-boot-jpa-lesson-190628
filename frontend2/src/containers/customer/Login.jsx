@@ -3,9 +3,13 @@ import {Form,Button} from 'react-bootstrap';
 import axios from 'axios';
 
 class Login extends Component {
-    state = {
-        customerId: '',
-        password: ''
+
+    constructor(props){
+        super(props)
+        this.state = {
+            customerId: '',
+            password: ''
+        }
     }
 
     render() {
@@ -31,22 +35,29 @@ class Login extends Component {
                         
                         </Form.Group>
                     </Form>
+                    <input type="submit" onClick={this.login} value="테스트"/>
                     <Button variant="success" onClick={this.login}>전송</Button>
                     <Button variant="danger">취소</Button>
                 </form>
             </div>
         );
     }
-    idChange =(e)=>{
+    //파라미터 하나여서 (e) -> e 로 바꿈
+    idChange =e=>{
         this.setState({customerId:e.target.value})
     }
 
-    pwChange=(e)=>{
+    pwChange=e=>{
         this.setState({password:e.target.value})
     }
 
-    login =(e)=>{
+    login =e=>{
         e.preventDefault()
+        this.setState({submitted: true})
+        const {customerId, password} = this.state
+
+        console.log(`customerId is ${customerId}`)
+        console.log(`password is ${password}`)
 
         const data = {
             customerId : this.state.customerId,
