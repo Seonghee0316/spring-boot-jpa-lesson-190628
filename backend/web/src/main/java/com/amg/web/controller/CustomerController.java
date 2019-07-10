@@ -3,11 +3,9 @@ package com.amg.web.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.amg.web.common.lambda.IFunction;
 import com.amg.web.common.lambda.ISupplier;
 import com.amg.web.common.util.Printer;
 import com.amg.web.domain.CustomerDTO;
@@ -23,20 +21,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
-
-//밑에꺼는 entity에서 dto로 바꿀때
-import org.springframework.beans.BeanUtils;
-
 /**
  * CustomerController
  */
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -174,21 +166,16 @@ public class CustomerController {
 
      @PostMapping("/login")
      public CustomerDTO login(@RequestBody CustomerDTO dto){
-         //String id = dto.getCustomerId(); <-- 이건 상태를 주는 것임.
         System.out.println("로그인 집합");
         System.out.println("ID: " + dto.getCustomerId());
         System.out.println("PW: " + dto.getPassword());
 
         //재활용 하지 않겠다.
         ISupplier fx = (()-> {
-            // Customer c = modelMapper.map(dto, Customer.class);
                  return repo.findByCustomerIdAndPassword(dto.getCustomerId(), 
                  dto.getPassword());
 
          });
-        //  CustomerDTO c = modelMapper.map(dto, CustomerDTO.class);
-        //  return c;
-         return dto;
-        //  return (CustomerDTO)fx.get();
+         return (CustomerDTO)fx.get();
      }
 }

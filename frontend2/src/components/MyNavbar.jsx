@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-boots
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import Login from '../containers/customer/Login.jsx'
 import Join from '../containers/customer/Join.jsx'
-import Mypage from '../containers/customer/Mypage.jsx'
+import MyPage from "../containers/customer/MyPage.jsx"
 import Home from '../containers/common/Home.jsx'
 import Hello from '../containers/customer/Hello.jsx'
 import LightSwitch from '../containers/common/LightSwitch.jsx'
@@ -15,39 +15,46 @@ const MyNavbar = () => {
     return (
         <Router>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">BITCAMP</Navbar.Brand>
+                <Navbar.Brand >BITCAMP</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#">
-                        <Link to="home"> Home</Link>
-                            
-                            </Nav.Link>
-                        <Nav.Link href="TodoApp">스케줄러</Nav.Link>
+                        <Nav.Link >
+                            <Link to="/home">Home</Link>
+                        </Nav.Link>
+                        {/* <Nav.Link>스케줄러</Nav.Link> */}
                         <NavDropdown title="기본문법" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="join">
-                            <Nav.Link href="Hello">Hello</Nav.Link>
+                            <NavDropdown.Item>
+                                <Link to="/hello">Hello</Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="join">
-                            <Nav.Link href="Clock">시계</Nav.Link>
+                            <NavDropdown.Item>
+                                <Link to="/switch">SWITCH</Link>
                             </NavDropdown.Item>
-
-                            <NavDropdown.Item href="login">
-                            <Nav.Link href="LightSwitch">LightSwitch</Nav.Link>
+                            <NavDropdown.Item>
+                                <Link to="/timer">타이머</Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="mypage">
-                            <Nav.Link href="Timer">Timer</Nav.Link>
-                                </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="remove">
-                            회원탈퇴
+                            <NavDropdown.Item>
+                                <Link to="/todoapp">스케쥴</Link>
                             </NavDropdown.Item>
-
+                            <NavDropdown.Item>
+                                <Link to="/clock">시 계</Link>
+                            </NavDropdown.Item>
                         </NavDropdown>
-                       
-
-                       
-
+                        <NavDropdown title="회원관리" id="basic-nav-dropdown">
+                            <NavDropdown.Item>
+                                <Link to="/join">회원가입</Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Link to="/login">로그인</Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Link to="/mypage">마이페이지</Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item>
+                                <Link to="/remove">회원탈퇴</Link>
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -55,19 +62,18 @@ const MyNavbar = () => {
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
-            <Route path="/login" exact component={Login} />
-            <Route path="/join" exact component={Join} />
-            <Route path="/mypage" exact component={Mypage} />
-            <Route path="/home" exact component={Home} />
-            <Route path="/hello" exact component={Hello}/>
-            <Route path="/lightSwitch" exact component={LightSwitch}/>
-            <Route path="/timer" exact component={Timer}/>
-            <Route path="/todoApp" exact component={TodoApp}/>
-            <Route path="/clock" exact component={Clock}/>
-            {/* <Route path="/"exact component={App}/> */}
-
+            <Route path="/login" component={Login} />
+            <Route path="/join" component={Join} />
+            <Route path="/mypage" component={MyPage} />
+            <Route path="/home" component={Home} />
+            <Route path="/hello" component={Hello} />
+            <Route path="/switch" component={LightSwitch} />
+            <Route path="/timer" component={Timer} />
+            <Route path="/todoapp" component={TodoApp} />
+            <Route path="/clock" component={Clock} />
         </Router>
     )
 }
+
 
 export default MyNavbar
