@@ -11,6 +11,12 @@ address VARCHAR(110) NOT NULL,
 postalcode VARCHAR(50) NOT NULL,
 photo VARCHAR(50) DEFAULT 'defaut_photo'
 )DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS member_roles;
+CREATE TABLE member_roles (
+fno INT AUTO_INCREMENT PRIMARY KEY,
+role_name VARCHAR
+)DEFAULT CHARSET=utf8;
 -- insert into customers(customer_id,customer_name,password,ssn,phone,city,address,postalcode) values ('haha','changha kim','1234','950117-1622514','01076794338','광주광역시 광산구 사암로 306(월곡동)','금호아파트 13동408호','62347');
 -- insert into customers(customer_id,customer_name,password,ssn,phone,city,address,postalcode) values ('hoho','이규진','1234','910512-162513','010-4745-2222','서울특별시 성북구 화랑로 140-1(하월곡동)','한성아파트 104동101호','02793');
 -- insert into customers(customer_id,customer_name,password,ssn,phone,city,address,postalcode) values ('test','이정록','1234','920412-162519','010-7676-3424','서울특별시 성북구 화랑로 142(하월곡동)','로하스 리빙홈 103호','02793');

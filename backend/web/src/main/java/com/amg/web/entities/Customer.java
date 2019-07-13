@@ -1,12 +1,17 @@
 package com.amg.web.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -26,6 +31,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+
 @Table(name = "customers")
 public class Customer implements Serializable{
 
@@ -44,6 +50,11 @@ public class Customer implements Serializable{
     @Column(name="address") private String address; 
     @Column(name="postalcode") private String postalcode;
     @Column(name="photo") private String photo;  
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer")
+    private List<MemberRole> roles;
+    
 
     @Override
     public String toString(){
