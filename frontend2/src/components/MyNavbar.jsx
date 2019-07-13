@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-boots
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import Login from '../containers/customer/Login.jsx'
 import Join from '../containers/customer/Join.jsx'
-import MyPage from "../containers/customer/MyPage.jsx"
+import MyPage from "../containers/customer/Mypage.jsx"
 import Home from '../containers/common/Home.jsx'
 import Hello from '../containers/customer/Hello.jsx'
 import LightSwitch from '../containers/common/LightSwitch.jsx'
